@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; connect-src 'self';">
+  <meta name="theme-color" content="#eaf0eb" id="theme-color-meta">
+  <meta name="description" content="Convert text case (Sentence, Title, camelCase, snake_case), apply Unicode styles, clean spaces, sort lines, translate Morse code, Binary, Base64, or edit documents with free online text tools.">
+  <meta name="application-name" content="Wordshift">
+  <meta name="application-version" content="1.0.0">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://wordshift.nobojit.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Wordshift">
+  <meta property="og:url" content="https://wordshift.nobojit.com/">
+  <meta property="og:title" content="Free Text Case Converter and Long-Form Editor | Wordshift">
+  <meta property="og:description" content="Convert text case, apply Unicode styles, translate Morse code and binary, or edit selected words in a long document with free online text tools.">
+  <meta property="og:image" content="https://wordshift.nobojit.com/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free Text Case Converter and Long-Form Editor | Wordshift">
+  <meta name="twitter:description" content="Convert text case, apply Unicode styles, translate Morse code and binary, or edit selected words in a long document with free online text tools.">
+  <meta name="twitter:image" content="https://wordshift.nobojit.com/assets/og-image.png">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <title>Free Text Case Converter and Long-Form Editor | Wordshift</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Wordshift",
+      "url": "https://wordshift.nobojit.com/",
+      "softwareVersion": "1.0.0",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "description": "Convert text case, apply Unicode styles, translate Morse code and binary, or edit selected words in a long document with free online text tools.",
+      "author": {
+        "@type": "Person",
+        "name": "Nobojit Halder",
+        "url": "https://github.com/nobojithalder"
+      }
+    }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand-lockup">
+      <a class="brand" href="#top" aria-label="Wordshift home">
+        <span class="brand-mark" aria-hidden="true"><span>A</span><i>a</i></span>
+        <span>wordshift<span class="brand-period">.</span></span>
+      </a>
+      <span class="brand-divider" aria-hidden="true"></span>
+      <h1 class="brand-tagline">Convert and style text</h1>
+    </div>
+    <div class="header-actions">
+      <button id="theme-toggle" class="icon-button theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark / light mode">
+        <span class="theme-icon" id="theme-icon" aria-hidden="true">☀️</span>
+      </button>
+      <a class="header-link" href="#tools">Explore tools <span aria-hidden="true">↓</span></a>
+    </div>
+  </header>
+
+  <main id="top" class="page-shell">
+    <section class="workbench" aria-label="Text editing tools">
+      <div class="mode-switch" role="tablist" aria-label="Choose an editing mode">
+        <button id="quick-mode-button" class="mode-switch-button" type="button" role="tab" aria-selected="true" aria-controls="quick-mode-view" data-view="quick"><span class="mode-switch-icon" aria-hidden="true">Aa</span>Quick convert</button>
+        <button id="document-mode-button" class="mode-switch-button" type="button" role="tab" aria-selected="false" aria-controls="document-mode-view" data-view="document"><span class="mode-switch-icon document-icon" aria-hidden="true">▤</span>Long-form edit<span id="draft-tab-badge" class="draft-tab-badge" hidden>Draft saved</span></button>
+      </div>
+      <div id="quick-mode-view" class="mode-view" role="tabpanel" aria-labelledby="quick-mode-button">
+      <div class="workflow-guide" aria-label="How to use the text converter">
+        <div class="workflow-step"><span class="step-number">1</span><span><strong>Paste</strong><small>Your text</small></span></div>
+        <span class="workflow-connector" aria-hidden="true"></span>
+        <div class="workflow-step"><span class="step-number">2</span><span><strong>Choose</strong><small>A transformation</small></span></div>
+        <span class="workflow-connector" aria-hidden="true"></span>
+        <div class="workflow-step"><span class="step-number">3</span><span><strong>Copy</strong><small>Your result</small></span></div>
+        <span class="workflow-live"><i aria-hidden="true"></i> Updates as you type</span>
+      </div>
+      <div class="tool-navigation">
+        <div class="category-tabs" id="category-tabs" role="tablist" aria-label="Tool categories"></div>
+        <div class="tool-navigation-right"><span class="keyboard-hint"><kbd>Ctrl</kbd>/<kbd>⌘</kbd> + <kbd>↵</kbd> to copy</span></div>
+      </div>
+
+      <div class="tool-picker" id="tool-picker" aria-label="Choose a conversion"></div>
+
+      <div class="selection-context" aria-live="polite">
+        <span class="selection-symbol" id="selection-symbol" aria-hidden="true">Aa</span>
+        <div class="selection-copy"><strong id="selection-title">Sentence case</strong><span id="selection-description">Capitalizes the start of each sentence.</span></div>
+        <span class="live-preview"><i aria-hidden="true"></i> Live preview</span>
+      </div>
+
+      <div class="encode-controls" id="encode-controls" hidden>
+        <span class="direction-label">Translate</span>
+        <div class="direction-toggle" role="group" aria-label="Conversion direction">
+          <button type="button" data-direction="encode" aria-pressed="true">Text to code</button>
+          <button type="button" data-direction="decode" aria-pressed="false">Code to text</button>
+        </div>
+        <span class="direction-help">Choose which way to translate.</span>
+      </div>
+
+      <div class="panels">
+        <section class="text-panel input-panel" aria-labelledby="input-heading">
+          <div class="panel-heading">
+            <div><span class="panel-index input-index">1</span><h2 id="input-heading">Your text</h2></div>
+            <div class="panel-heading-actions">
+              <button id="paste-button" class="quiet-action" type="button" title="Paste from clipboard">Paste <span aria-hidden="true">📋</span></button>
+              <label class="quiet-action file-action" for="file-upload" title="Open a text file">Open a file <span aria-hidden="true">↗</span></label>
+              <input id="file-upload" class="visually-hidden" type="file" accept=".txt,.md,.csv,.html,.json,.xml,.log,text/plain,text/markdown,text/csv,application/json">
+            </div>
+          </div>
+          <textarea id="source-text" placeholder="Type or paste something here, or drop a file…" spellcheck="true" aria-label="Text to convert"></textarea>
+          <div class="panel-footer">
+            <div class="text-stats" aria-live="polite">
+              <span><strong id="char-count">0</strong> characters</span>
+              <span><strong id="word-count">0</strong> words</span>
+              <span><strong id="line-count">0</strong> lines</span>
+              <span id="reading-time-wrap"><strong id="reading-time">0</strong> min read</span>
+              <button id="quick-analytics-btn" class="quiet-action stats-link" type="button" title="View detailed text analytics">📊 Details</button>
+            </div>
+            <button id="clear-button" class="quiet-action" type="button">Clear <span aria-hidden="true">×</span></button>
+          </div>
+        </section>
+
+        <div class="transfer-rail" aria-hidden="true"><span>→</span></div>
+
+        <section class="text-panel result-panel" aria-labelledby="result-heading">
+          <div class="panel-heading">
+            <div><span class="panel-index result-index">2</span><h2 id="result-heading">Your result</h2></div>
+            <div class="result-actions">
+              <button id="swap-button" class="icon-action" type="button" title="Use result as input" aria-label="Use result as input"><span aria-hidden="true">⇄</span></button>
+              <button id="copy-button" class="copy-button" type="button"><span class="copy-icon" aria-hidden="true">▢</span><span id="copy-label">Copy</span></button>
+            </div>
+          </div>
+          <textarea id="result-text" placeholder="Your converted text will appear here…" spellcheck="false" aria-label="Converted text" readonly></textarea>
+          <div class="panel-footer result-footer">
+            <div id="result-status" class="result-status" aria-live="polite">Select a tool to get started</div>
+            <div class="result-footer-actions">
+              <button id="play-button" class="quiet-action play-action" type="button" hidden><span aria-hidden="true">▶</span> Play</button>
+              <button id="quick-diff-btn" class="quiet-action" type="button" disabled title="Compare input with result">⚖ Diff</button>
+              <button id="quick-export-btn" class="quiet-action" type="button" disabled title="Export result">↓ Export</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <details class="options" id="sentence-options">
+        <summary><span>Case options</span><span class="summary-plus" aria-hidden="true">+</span></summary>
+        <div class="options-content">
+          <label for="custom-terms">Keep these names and terms in this form</label>
+          <input id="custom-terms" type="text" maxlength="2000" placeholder="e.g. iPhone, OpenAI, New York">
+          <p>Separate terms with commas. They’re saved only in this browser.</p>
+        </div>
+      </details>
+      </div>
+
+      <div id="document-mode-view" class="mode-view document-mode-view" role="tabpanel" aria-labelledby="document-mode-button" hidden>
+        <div class="document-heading">
+          <div>
+            <p class="eyebrow">Long document editor</p>
+            <h2>Edit selected text in place.</h2>
+            <p>Select a word, phrase, or sentence, then right-click to choose a change.</p>
+          </div>
+          <div class="document-key" aria-hidden="true"><span>select text</span><b>↗</b><span>right-click</span></div>
+        </div>
+        <div class="document-toolbar">
+          <div class="document-name"><span class="document-file-icon" aria-hidden="true">▤</span><strong id="document-title">Untitled document</strong></div>
+          <div class="document-actions">
+            <button id="editor-menu-trigger" class="document-action" type="button" disabled title="Transform selection">✦ <span>Transform</span></button>
+            <span class="toolbar-divider" aria-hidden="true"></span>
+            <button id="editor-find-trigger" class="document-action" type="button" title="Find and replace (Ctrl+F)">🔍 <span>Find</span></button>
+            <button id="editor-diff-trigger" class="document-action" type="button" disabled title="Compare with previous edit">⚖ <span>Diff</span></button>
+            <button id="editor-preview-toggle" class="document-action preview-toggle" type="button" title="Toggle Markdown preview">👁 <span>Preview</span></button>
+            <span class="toolbar-divider" aria-hidden="true"></span>
+            <button id="editor-undo" class="document-action" type="button" disabled title="Undo last edit">↶ <span>Undo</span></button>
+            <button id="editor-redo" class="document-action" type="button" disabled title="Redo last edit">↷ <span>Redo</span></button>
+            <span class="toolbar-divider" aria-hidden="true"></span>
+            <label class="document-action file-action" for="editor-file-upload" title="Open a file into editor">↗ <span>Open</span></label>
+            <input id="editor-file-upload" class="visually-hidden" type="file" accept=".txt,.md,.csv,.html,.json,.xml,.log,text/plain,text/markdown,text/csv,application/json">
+            <button id="editor-copy" class="document-action" type="button" disabled>▢ <span>Copy all</span></button>
+            <button id="editor-export-trigger" class="document-action" type="button" disabled title="Export document">↓ <span>Export</span></button>
+            <button id="editor-clear" class="document-action clear-document" type="button" disabled>Clear</button>
+          </div>
+        </div>
+
+        <div id="find-replace-bar" class="find-replace-bar" hidden>
+          <div class="find-row">
+            <div class="find-input-wrap">
+              <span class="find-icon" aria-hidden="true">🔍</span>
+              <input id="find-input" type="text" placeholder="Find in document…" aria-label="Find in document">
+              <span id="find-count" class="find-count">0 of 0</span>
+            </div>
+            <div class="find-nav">
+              <button id="find-prev" type="button" title="Previous match (Shift+Enter)" aria-label="Previous match">↑</button>
+              <button id="find-next" type="button" title="Next match (Enter)" aria-label="Next match">↓</button>
+            </div>
+            <div class="find-options">
+              <button id="find-case-toggle" type="button" class="find-opt-btn" title="Match case" aria-pressed="false">Aa</button>
+              <button id="find-word-toggle" type="button" class="find-opt-btn" title="Match whole word" aria-pressed="false">W</button>
+              <button id="find-regex-toggle" type="button" class="find-opt-btn" title="Regular expression" aria-pressed="false">.*</button>
+            </div>
+            <button id="find-close" type="button" class="find-close" title="Close find bar (Esc)" aria-label="Close find bar">×</button>
+          </div>
+          <div class="replace-row">
+            <input id="replace-input" type="text" placeholder="Replace with…" aria-label="Replace with">
+            <button id="replace-one-btn" type="button" class="find-action-btn">Replace</button>
+            <button id="replace-all-btn" type="button" class="find-action-btn">Replace all</button>
+          </div>
+        </div>
+
+        <div id="editor-instructions" class="editor-instructions"><span class="instruction-mark" aria-hidden="true">↳</span><span><strong>Select a part of your text</strong> and click Transform or right-click to apply a change. Edits happen in place.</span><span id="editor-selection-status" class="selection-status">No selection</span></div>
+        <div class="document-editor-wrap">
+          <textarea id="document-editor" class="document-editor" spellcheck="true" placeholder="Paste, write, or drop your article here…&#10;&#10;Select a word, sentence, or paragraph to make a change only to that part." aria-label="Long-form text editor" aria-describedby="editor-instructions" aria-haspopup="dialog" aria-controls="selection-menu" aria-expanded="false"></textarea>
+          <div id="document-preview" class="document-preview markdown-body" hidden></div>
+          <div id="selection-menu" class="selection-menu" role="dialog" aria-labelledby="selection-menu-title" hidden>
+            <div class="selection-menu-heading">
+              <span id="selection-menu-title">Apply to selection</span>
+              <button id="close-selection-menu" type="button" aria-label="Close menu">×</button>
+            </div>
+            <div class="selection-menu-preview" id="selection-menu-preview"></div>
+            <div class="selection-menu-tabs" role="tablist" aria-label="Change type">
+              <button type="button" role="tab" data-menu-category="case" aria-selected="true">Case</button>
+              <button type="button" role="tab" data-menu-category="transform" aria-selected="false">Transform</button>
+              <button type="button" role="tab" data-menu-category="style" aria-selected="false">Style</button>
+              <button type="button" role="tab" data-menu-category="encode" aria-selected="false">Encode</button>
+            </div>
+            <div class="selection-menu-items" id="selection-menu-items"></div>
+            <div class="selection-menu-footer"><span>Changes the selection in place</span><kbd>Esc</kbd></div>
+          </div>
+        </div>
+        <div class="document-footer">
+          <div class="document-stats"><span><strong id="editor-char-count">0</strong> characters</span><span><strong id="editor-word-count">0</strong> words</span><span><strong id="editor-paragraph-count">0</strong> paragraphs</span><span id="editor-reading-time-wrap"><strong id="editor-reading-time">0</strong> min read</span><button id="editor-analytics-btn" class="quiet-action stats-link" type="button" title="View detailed document analytics">📊 Details</button></div>
+          <span id="draft-status" class="draft-status" aria-live="polite">Draft recovery on</span>
+          <span id="editor-status" class="document-status" aria-live="polite">Ready for your text</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="tools-section" id="tools" aria-labelledby="tools-title">
+      <div class="tool-shelf">
+        <div class="section-heading">
+          <div><p class="eyebrow">The rest of your text toolkit</p><h2 id="tools-title">Small tools. Satisfying fixes.</h2></div>
+          <p>Jump to a popular conversion. Use Quick convert for a full block or Long-form edit for precise changes.</p>
+        </div>
+        <div class="tool-overview" id="tool-overview"></div>
+        <div class="shelf-decoration" aria-hidden="true"><span>Aa</span><i>↗</i></div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <a class="brand footer-brand" href="#top"><span class="brand-mark" aria-hidden="true"><span>A</span><i>a</i></span><span>wordshift<span class="brand-period">.</span></span></a>
+      <span class="footer-credit"><span>Made by <strong>Nobojit Halder</strong></span><span class="footer-version">Version 1.0.0</span></span>
+      <div class="footer-actions">
+        <a class="github-button" href="https://github.com/nobojithalder/Wordshift" target="_blank" rel="noopener noreferrer" aria-label="Wordshift on GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .9A11.1 11.1 0 0 0 8.5 22.5c.6.1.8-.2.8-.5v-1.9c-3.1.7-3.8-1.3-3.8-1.3-.5-1.3-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1.8 1.9 3.6 1.4.1-.7.4-1.2.7-1.5-2.5-.3-5.1-1.2-5.1-5.5 0-1.2.4-2.1 1.1-2.9-.1-.3-.5-1.4.1-2.9 0 0 .9-.3 3 1.1a10.4 10.4 0 0 1 5.4 0c2.1-1.4 3-1.1 3-1.1.6 1.5.2 2.6.1 2.9.7.8 1.1 1.7 1.1 2.9 0 4.3-2.6 5.2-5.1 5.5.4.3.8 1 .8 2v3c0 .3.2.6.8.5A11.1 11.1 0 0 0 12 .9Z"/></svg>
+          <span>GitHub</span>
+        </a>
+        <a class="back-to-top" href="#top">Back to top ↑</a>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Diff Comparison Modal -->
+  <div id="diff-modal" class="modal-backdrop" hidden>
+    <div class="modal-card diff-card" role="dialog" aria-labelledby="diff-title" aria-modal="true">
+      <div class="modal-header">
+        <h3 id="diff-title" class="modal-title">Text Comparison / Diff</h3>
+        <button id="diff-close" class="modal-close" type="button" aria-label="Close diff">×</button>
+      </div>
+      <div class="diff-summary" id="diff-summary"></div>
+      <div class="diff-body" id="diff-body"></div>
+      <div class="modal-footer">
+        <span class="diff-legend"><span class="legend-del">Deleted</span><span class="legend-add">Added</span></span>
+        <button id="diff-done-btn" class="modal-btn" type="button">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Export Options Modal -->
+  <div id="export-modal" class="modal-backdrop" hidden>
+    <div class="modal-card export-card" role="dialog" aria-labelledby="export-title" aria-modal="true">
+      <div class="modal-header">
+        <h3 id="export-title" class="modal-title">Export Document</h3>
+        <button id="export-close" class="modal-close" type="button" aria-label="Close export dialog">×</button>
+      </div>
+      <div class="export-options-grid">
+        <button type="button" class="export-option-item" data-export-type="txt">
+          <span class="export-icon" aria-hidden="true">📄</span>
+          <strong>Plain Text (.txt)</strong>
+          <small>Raw text file</small>
+        </button>
+        <button type="button" class="export-option-item" data-export-type="md">
+          <span class="export-icon" aria-hidden="true">📝</span>
+          <strong>Markdown (.md)</strong>
+          <small>Standard markdown file</small>
+        </button>
+        <button type="button" class="export-option-item" data-export-type="html">
+          <span class="export-icon" aria-hidden="true">🌐</span>
+          <strong>HTML Document (.html)</strong>
+          <small>Styled web page</small>
+        </button>
+        <button type="button" class="export-option-item" data-export-type="print">
+          <span class="export-icon" aria-hidden="true">🖨️</span>
+          <strong>Print / Save as PDF</strong>
+          <small>Clean formatted print layout</small>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Text Analytics Modal -->
+  <div id="analytics-modal" class="modal-backdrop" hidden>
+    <div class="modal-card analytics-card" role="dialog" aria-labelledby="analytics-title" aria-modal="true">
+      <div class="modal-header">
+        <h3 id="analytics-title" class="modal-title">Text Analytics & Readability</h3>
+        <button id="analytics-close" class="modal-close" type="button" aria-label="Close analytics dialog">×</button>
+      </div>
+      <div class="analytics-grid" id="analytics-grid"></div>
+      <div class="modal-footer">
+        <button id="analytics-done-btn" class="modal-btn" type="button">Done</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
