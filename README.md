@@ -54,8 +54,7 @@
 - [Keyboard Shortcuts](#-keyboard-shortcuts)
 - [Privacy & Security](#-privacy--security)
 - [Project Architecture](#-project-architecture)
-- [Getting Started & Local Development](#-getting-started--local-development)
-- [Deployment](#-deployment)
+- [Running Locally](#-running-locally)
 - [Author & License](#-author--license)
 
 ---
@@ -299,52 +298,18 @@ Wordshift/
 
 ---
 
-## 🚀 Getting Started & Local Development
+## 🚀 Running Locally
 
-Because Wordshift uses zero frameworks or bundlers, you can run and develop it locally without installing Node.js, npm, or any compilers.
+Wordshift uses zero frameworks, build tools, or compilers. Running it is as simple as opening a web page:
 
-### 1. Clone the repository
+1. Clone or download the repository:
+   ```bash
+   git clone https://github.com/nobojithalder/Wordshift.git
+   cd Wordshift
+   ```
+2. **Double-click `index.html`** in your file manager to open it immediately in any browser (Chrome, Edge, Firefox, Safari).
 
-```bash
-git clone https://github.com/nobojithalder/Wordshift.git
-cd Wordshift
-```
-
-### 2. Run locally
-
-You can open `index.html` directly in any web browser, or serve it using any lightweight local static web server:
-
-**Using Python:**
-```bash
-python -m http.server 8000
-```
-Then visit `http://localhost:8000`.
-
-**Using Node.js / npx:**
-```bash
-npx serve .
-```
-
-**Using VS Code:**
-Install the **Live Server** extension and click **Go Live**.
-
----
-
-## 🚢 Deployment
-
-### GitHub Pages (Included Workflow)
-
-This repository includes a pre-configured GitHub Actions workflow in [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
-
-To deploy automatically:
-1. Push this repository to your GitHub account: `https://github.com/nobojithalder/Wordshift`.
-2. Go to **Settings » Pages** in your GitHub repository.
-3. Under **Build and deployment > Source**, select **GitHub Actions**.
-4. Your website will be live at `https://wordshift.nobojit.com/` (configured via the included `CNAME` file).
-
-### Other Hosting Platforms
-
-Wordshift can be deployed in seconds to any static hosting provider (Vercel, Netlify, Cloudflare Pages, AWS S3, or Firebase Hosting) simply by pointing the publish directory to the repository root.
+*That's it! No servers, no Node.js, and no installations required.*
 
 ---
 
